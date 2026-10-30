@@ -50,3 +50,6 @@ This document maps each reviewer request to the evidence in this repository and 
 - [ ] Justification for choosing PhoBERT over ViSoBERT (R1-3.3).
 - [ ] Sensitivity of the single calibration split used for several selection roles (R1-1iii, R2-7).
 - [ ] Funding statement, Shopee Terms of Service and personal-data-protection statement (R1-3.6).
+
+
+Zenodo DOI of the clean release: https://doi.org/10.5281/zenodo.23797913

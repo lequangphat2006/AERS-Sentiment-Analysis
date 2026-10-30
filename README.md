@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23797913.svg)](https://doi.org/10.5281/zenodo.23797913)
+
 
 # AERS-Pro: A Hybrid Stacking Framework for Vietnamese E-commerce Sentiment Analysis
 
