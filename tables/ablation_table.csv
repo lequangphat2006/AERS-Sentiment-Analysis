@@ -1,0 +1,41 @@
+variant,model,f1,acc,ece,brier,neutral_f1,n_seeds
+full,"LR (base, fused feats)",0.8501,0.8555,0.038,0.2185,0.8128,10
+full,LightGBM (base),0.8401,0.8464,0.0339,0.2297,0.7989,10
+full,LinearSVC (base),0.8497,0.8553,0.0449,0.222,0.8097,10
+full,avg of 3 base,0.8541,0.8599,0.023,0.2093,0.8145,10
+full,final (conditional rule),0.8628,0.866,0.0249,0.198,0.835,10
+full,stacking + Platt3x3 (always),0.8645,0.8677,0.0247,0.1955,0.8362,10
+full,stacking + TS,0.8622,0.8653,0.0246,0.1986,0.8356,10
+full,stacking raw,0.8622,0.8653,0.0262,0.1984,0.8356,10
+no_both,"LR (base, fused feats)",0.8511,0.8562,0.0359,0.2178,0.8153,10
+no_both,LightGBM (base),0.8417,0.8473,0.0283,0.2306,0.8046,10
+no_both,LinearSVC (base),0.8484,0.8539,0.0449,0.2213,0.8086,10
+no_both,avg of 3 base,0.8545,0.8595,0.0253,0.2088,0.8189,10
+no_both,final (conditional rule),0.863,0.8664,0.0277,0.1965,0.8325,10
+no_both,stacking + Platt3x3 (always),0.8625,0.8659,0.0264,0.1961,0.8327,10
+no_both,stacking + TS,0.8622,0.8655,0.0266,0.198,0.8343,10
+no_both,stacking raw,0.8622,0.8655,0.035,0.1982,0.8343,10
+no_cw,"LR (base, fused feats)",0.8482,0.8542,0.04,0.2214,0.8085,10
+no_cw,LightGBM (base),0.8395,0.8463,0.0359,0.2319,0.7953,10
+no_cw,LinearSVC (base),0.8497,0.8553,0.0449,0.2219,0.8093,10
+no_cw,avg of 3 base,0.8532,0.8593,0.0222,0.2107,0.8121,10
+no_cw,final (conditional rule),0.8645,0.868,0.0243,0.1957,0.8344,10
+no_cw,stacking + Platt3x3 (always),0.8646,0.8681,0.0232,0.1952,0.8345,10
+no_cw,stacking + TS,0.8617,0.8655,0.0284,0.197,0.8324,10
+no_cw,stacking raw,0.8617,0.8655,0.0315,0.1969,0.8324,10
+no_lex,"LR (base, fused feats)",0.8506,0.8557,0.0359,0.2182,0.8151,10
+no_lex,LightGBM (base),0.8421,0.8476,0.0278,0.2316,0.8046,10
+no_lex,LinearSVC (base),0.8488,0.8542,0.0451,0.2214,0.8091,10
+no_lex,avg of 3 base,0.8542,0.8593,0.0246,0.2094,0.8179,10
+no_lex,final (conditional rule),0.862,0.8653,0.0249,0.1968,0.8325,10
+no_lex,stacking + Platt3x3 (always),0.8617,0.8652,0.0257,0.1962,0.8308,10
+no_lex,stacking + TS,0.8593,0.8628,0.0265,0.1985,0.8297,10
+no_lex,stacking raw,0.8593,0.8628,0.0308,0.1985,0.8297,10
+no_pos,"LR (base, fused feats)",0.8505,0.8557,0.0388,0.2187,0.8143,10
+no_pos,LightGBM (base),0.8407,0.8467,0.036,0.2306,0.8001,10
+no_pos,LinearSVC (base),0.8498,0.8553,0.0447,0.2218,0.8101,10
+no_pos,avg of 3 base,0.8541,0.8598,0.0228,0.2096,0.8152,10
+no_pos,final (conditional rule),0.8632,0.8662,0.0249,0.198,0.8367,10
+no_pos,stacking + Platt3x3 (always),0.8643,0.8673,0.0259,0.1964,0.8373,10
+no_pos,stacking + TS,0.8615,0.8646,0.0239,0.1997,0.8354,10
+no_pos,stacking raw,0.8615,0.8646,0.0256,0.1995,0.8354,10

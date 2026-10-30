@@ -1,0 +1,5 @@
+﻿Model,F1_Macro_Mean,F1_Macro_Std,Notes
+AERS-Pro (Full),0.8665,0.0094,Proposed Model (Stacking)
+B2: LinearSVC (Fusion),0.8454,0.0128,LinearSVC on TF-IDF + Char-Hash
+B3: TF-IDF only,0.8252,0.0076,Word-level TF-IDF without char-hash
+B4: Char-Hash only,0.7972,0.0153,Character n-gram hashing without TF-IDF

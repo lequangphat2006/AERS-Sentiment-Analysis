@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use this repository, please cite it as below."
+title: "AERS-Pro: code, PII-masked corpus and per-sample predictions for Vietnamese e-commerce sentiment analysis"
+type: software
+authors:
+  - family-names: "Lê"
+    given-names: "Quang Phát"
+  - family-names: "Trần"
+    given-names: "Trọng Kiên"
+  - family-names: "Đinh"
+    given-names: "Thị Hồng Huyên"
+repository-code: "https://github.com/lequangphat2006/AERS-Sentiment-Analysis"
+license: MIT
+date-released: 2026-10-30
+keywords:
+  - Vietnamese
+  - sentiment analysis
+  - probability calibration
+  - stacking ensemble

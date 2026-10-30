@@ -1,0 +1,815 @@
+{
+  "version": "phobert",
+  "model_name": "vinai/phobert-base-v2",
+  "seeds": [
+    42,
+    7,
+    123,
+    2024,
+    99,
+    555,
+    2026,
+    31337,
+    8080,
+    12321
+  ],
+  "group_col": "near_dup_group_id",
+  "metrics_by_seed": {
+    "42": {
+      "f1": 0.8866449217881375,
+      "accuracy": 0.8901222953904045,
+      "ece": 0.10800171239355878,
+      "brier": 0.21647933705791594,
+      "training_time_sec": 1630.4306454658508,
+      "model_size_mb": 516.9534711837769,
+      "mean_confidence": 0.9981240630149841,
+      "mean_entropy": 0.004793756175786257,
+      "subgroup_results": {
+        "phu_dinh": {
+          "n": 2632,
+          "accuracy": 0.8541033434650456,
+          "f1_macro": 0.8544004795180378
+        },
+        "hedge": {
+          "n": 248,
+          "accuracy": 0.9475806451612904,
+          "f1_macro": 0.9184810744810745
+        },
+        "trai_chieu": {
+          "n": 2005,
+          "accuracy": 0.8359102244389027,
+          "f1_macro": 0.8393115913470174
+        },
+        "cau_ngan": {
+          "n": 127,
+          "accuracy": 0.8503937007874016,
+          "f1_macro": 0.7988801887884457
+        }
+      },
+      "hyperparams": {
+        "max_length": 192,
+        "batch_size": 32,
+        "grad_accum": 1,
+        "lr": 3e-05,
+        "epochs": 5,
+        "freeze_layers": 0
+      },
+      "best_epoch": 5.0,
+      "best_cal_f1": 0.8697058537348514,
+      "cal_curve": [
+        [
+          1.0,
+          0.8247980814331259
+        ],
+        [
+          2.0,
+          0.8549111661840451
+        ],
+        [
+          3.0,
+          0.8480634033982216
+        ],
+        [
+          4.0,
+          0.8579481912924574
+        ],
+        [
+          5.0,
+          0.8697058537348514
+        ]
+      ],
+      "trunc_rate": {
+        "train": 0.0031651963095157922,
+        "cal": 0.00897560975609756,
+        "test": 0.0018814675446848542
+      },
+      "segmenter": "underthesea",
+      "class_weight": null,
+      "weight_decay": 0.01,
+      "warmup_ratio": 0.1,
+      "scheduler": "linear (Trainer default)",
+      "early_stopping_patience": 2,
+      "checkpoint_selection": "best calibration F1-macro (load_best_model_at_end)"
+    },
+    "7": {
+      "f1": 0.8814047655964412,
+      "accuracy": 0.8866106212835759,
+      "ece": 0.10989182185315198,
+      "brier": 0.21993070734301723,
+      "training_time_sec": 1670.492728471756,
+      "model_size_mb": 516.9545803070068,
+      "mean_confidence": 0.9965023398399353,
+      "mean_entropy": 0.010016897693276405,
+      "subgroup_results": {
+        "phu_dinh": {
+          "n": 2313,
+          "accuracy": 0.8512753999135322,
+          "f1_macro": 0.8469255130973444
+        },
+        "hedge": {
+          "n": 305,
+          "accuracy": 0.8885245901639345,
+          "f1_macro": 0.8331519049975261
+        },
+        "trai_chieu": {
+          "n": 1770,
+          "accuracy": 0.848587570621469,
+          "f1_macro": 0.848345066281501
+        },
+        "cau_ngan": {
+          "n": 122,
+          "accuracy": 0.9262295081967213,
+          "f1_macro": 0.9017753210265537
+        }
+      },
+      "hyperparams": {
+        "max_length": 192,
+        "batch_size": 32,
+        "grad_accum": 1,
+        "lr": 3e-05,
+        "epochs": 5,
+        "freeze_layers": 0
+      },
+      "best_epoch": 4.0,
+      "best_cal_f1": 0.8814011536068503,
+      "cal_curve": [
+        [
+          1.0,
+          0.8185253916697071
+        ],
+        [
+          2.0,
+          0.8484807372735736
+        ],
+        [
+          3.0,
+          0.8727742353246613
+        ],
+        [
+          4.0,
+          0.8814011536068503
+        ],
+        [
+          5.0,
+          0.8721094233097014
+        ]
+      ],
+      "trunc_rate": {
+        "train": 0.0047815549878823605,
+        "cal": 0.004664723032069971,
+        "test": 0.001230264506868977
+      },
+      "segmenter": "underthesea",
+      "class_weight": null,
+      "weight_decay": 0.01,
+      "warmup_ratio": 0.1,
+      "scheduler": "linear (Trainer default)",
+      "early_stopping_patience": 2,
+      "checkpoint_selection": "best calibration F1-macro (load_best_model_at_end)"
+    },
+    "123": {
+      "f1": 0.87947767279353,
+      "accuracy": 0.8836215271031669,
+      "ece": 0.11353745424842425,
+      "brier": 0.22840735562380565,
+      "training_time_sec": 1646.3500487804413,
+      "model_size_mb": 516.9545745849609,
+      "mean_confidence": 0.9971590042114258,
+      "mean_entropy": 0.00702505512163043,
+      "subgroup_results": {
+        "phu_dinh": {
+          "n": 2483,
+          "accuracy": 0.860249697946033,
+          "f1_macro": 0.8499932132683702
+        },
+        "hedge": {
+          "n": 420,
+          "accuracy": 0.9166666666666666,
+          "f1_macro": 0.8698143662873541
+        },
+        "trai_chieu": {
+          "n": 1965,
+          "accuracy": 0.8310432569974555,
+          "f1_macro": 0.8307632311351179
+        },
+        "cau_ngan": {
+          "n": 126,
+          "accuracy": 0.9285714285714286,
+          "f1_macro": 0.8344894137430252
+        }
+      },
+      "hyperparams": {
+        "max_length": 192,
+        "batch_size": 32,
+        "grad_accum": 1,
+        "lr": 3e-05,
+        "epochs": 5,
+        "freeze_layers": 0
+      },
+      "best_epoch": 5.0,
+      "best_cal_f1": 0.8993607771240056,
+      "cal_curve": [
+        [
+          1.0,
+          0.8460200483695344
+        ],
+        [
+          2.0,
+          0.8721598422707402
+        ],
+        [
+          3.0,
+          0.8536874422641695
+        ],
+        [
+          4.0,
+          0.8895771613954145
+        ],
+        [
+          5.0,
+          0.8993607771240056
+        ]
+      ],
+      "trunc_rate": {
+        "train": 0.006269592476489028,
+        "cal": 0.0013594872790833172,
+        "test": 0.0003885758694385079
+      },
+      "segmenter": "underthesea",
+      "class_weight": null,
+      "weight_decay": 0.01,
+      "warmup_ratio": 0.1,
+      "scheduler": "linear (Trainer default)",
+      "early_stopping_patience": 2,
+      "checkpoint_selection": "best calibration F1-macro (load_best_model_at_end)"
+    },
+    "2024": {
+      "f1": 0.8577759408544198,
+      "accuracy": 0.8672124600638977,
+      "ece": 0.11668222081570773,
+      "brier": 0.24997543715538353,
+      "training_time_sec": 1660.9580147266388,
+      "model_size_mb": 516.9545774459839,
+      "mean_confidence": 0.9836488366127014,
+      "mean_entropy": 0.055845651775598526,
+      "subgroup_results": {
+        "phu_dinh": {
+          "n": 2345,
+          "accuracy": 0.826865671641791,
+          "f1_macro": 0.82772777233351
+        },
+        "hedge": {
+          "n": 300,
+          "accuracy": 0.8933333333333333,
+          "f1_macro": 0.8385869565217391
+        },
+        "trai_chieu": {
+          "n": 1924,
+          "accuracy": 0.7946985446985447,
+          "f1_macro": 0.8017573949550786
+        },
+        "cau_ngan": {
+          "n": 136,
+          "accuracy": 0.9264705882352942,
+          "f1_macro": 0.9127439267224213
+        }
+      },
+      "hyperparams": {
+        "max_length": 192,
+        "batch_size": 32,
+        "grad_accum": 1,
+        "lr": 3e-05,
+        "epochs": 5,
+        "freeze_layers": 0
+      },
+      "best_epoch": 3.0,
+      "best_cal_f1": 0.8705240541797492,
+      "cal_curve": [
+        [
+          1.0,
+          0.83781789899473
+        ],
+        [
+          2.0,
+          0.8512854687294018
+        ],
+        [
+          3.0,
+          0.8705240541797492
+        ],
+        [
+          4.0,
+          0.868766323579126
+        ],
+        [
+          5.0,
+          0.8661832649862452
+        ]
+      ],
+      "trunc_rate": {
+        "train": 0.0038969616908850727,
+        "cal": 0.007391558062633729,
+        "test": 0.0011980830670926517
+      },
+      "segmenter": "underthesea",
+      "class_weight": null,
+      "weight_decay": 0.01,
+      "warmup_ratio": 0.1,
+      "scheduler": "linear (Trainer default)",
+      "early_stopping_patience": 2,
+      "checkpoint_selection": "best calibration F1-macro (load_best_model_at_end)"
+    },
+    "99": {
+      "f1": 0.8868713643167695,
+      "accuracy": 0.8906154160703332,
+      "ece": 0.10668037919222129,
+      "brier": 0.2151028192957489,
+      "training_time_sec": 1666.7334580421448,
+      "model_size_mb": 516.9545783996582,
+      "mean_confidence": 0.9963886737823486,
+      "mean_entropy": 0.01012763287872076,
+      "subgroup_results": {
+        "phu_dinh": {
+          "n": 2208,
+          "accuracy": 0.8559782608695652,
+          "f1_macro": 0.850550626153463
+        },
+        "hedge": {
+          "n": 282,
+          "accuracy": 0.9432624113475178,
+          "f1_macro": 0.9035412953060012
+        },
+        "trai_chieu": {
+          "n": 1991,
+          "accuracy": 0.8407835258663988,
+          "f1_macro": 0.8429598115592588
+        },
+        "cau_ngan": {
+          "n": 121,
+          "accuracy": 0.9504132231404959,
+          "f1_macro": 0.9646153846153847
+        }
+      },
+      "hyperparams": {
+        "max_length": 192,
+        "batch_size": 32,
+        "grad_accum": 1,
+        "lr": 3e-05,
+        "epochs": 5,
+        "freeze_layers": 0
+      },
+      "best_epoch": 4.0,
+      "best_cal_f1": 0.8938498126220679,
+      "cal_curve": [
+        [
+          1.0,
+          0.8121169566261547
+        ],
+        [
+          2.0,
+          0.8671367893734847
+        ],
+        [
+          3.0,
+          0.8740809013747238
+        ],
+        [
+          4.0,
+          0.8938498126220679
+        ],
+        [
+          5.0,
+          0.8858731296842826
+        ]
+      ],
+      "trunc_rate": {
+        "train": 0.004006831318970047,
+        "cal": 0.001932740626207963,
+        "test": 0.006542629319157636
+      },
+      "segmenter": "underthesea",
+      "class_weight": null,
+      "weight_decay": 0.01,
+      "warmup_ratio": 0.1,
+      "scheduler": "linear (Trainer default)",
+      "early_stopping_patience": 2,
+      "checkpoint_selection": "best calibration F1-macro (load_best_model_at_end)"
+    },
+    "555": {
+      "f1": 0.8612405579118034,
+      "accuracy": 0.868155762008302,
+      "ece": 0.11655043286753164,
+      "brier": 0.24275867707311802,
+      "training_time_sec": 1666.6960141658783,
+      "model_size_mb": 516.9545764923096,
+      "mean_confidence": 0.9844149351119995,
+      "mean_entropy": 0.048792704939842224,
+      "subgroup_results": {
+        "phu_dinh": {
+          "n": 2436,
+          "accuracy": 0.8411330049261084,
+          "f1_macro": 0.8388511026398913
+        },
+        "hedge": {
+          "n": 356,
+          "accuracy": 0.8258426966292135,
+          "f1_macro": 0.7960775715145952
+        },
+        "trai_chieu": {
+          "n": 1995,
+          "accuracy": 0.7964912280701755,
+          "f1_macro": 0.8029824090077876
+        },
+        "cau_ngan": {
+          "n": 126,
+          "accuracy": 0.9206349206349206,
+          "f1_macro": 0.8938366485834841
+        }
+      },
+      "hyperparams": {
+        "max_length": 192,
+        "batch_size": 32,
+        "grad_accum": 1,
+        "lr": 3e-05,
+        "epochs": 5,
+        "freeze_layers": 0
+      },
+      "best_epoch": 3.0,
+      "best_cal_f1": 0.8686664140904364,
+      "cal_curve": [
+        [
+          1.0,
+          0.8181590174668013
+        ],
+        [
+          2.0,
+          0.8359346861080373
+        ],
+        [
+          3.0,
+          0.8686664140904364
+        ],
+        [
+          4.0,
+          0.858027070409805
+        ],
+        [
+          5.0,
+          0.8670100383288092
+        ]
+      ],
+      "trunc_rate": {
+        "train": 0.0046554324306602845,
+        "cal": 0.0014059048001606748,
+        "test": 0.00494168808064835
+      },
+      "segmenter": "underthesea",
+      "class_weight": null,
+      "weight_decay": 0.01,
+      "warmup_ratio": 0.1,
+      "scheduler": "linear (Trainer default)",
+      "early_stopping_patience": 2,
+      "checkpoint_selection": "best calibration F1-macro (load_best_model_at_end)"
+    },
+    "2026": {
+      "f1": 0.8810241819972603,
+      "accuracy": 0.8853653732519204,
+      "ece": 0.11111530150300249,
+      "brier": 0.2225881353382417,
+      "training_time_sec": 1668.7715220451355,
+      "model_size_mb": 516.9545812606812,
+      "mean_confidence": 0.9964807629585266,
+      "mean_entropy": 0.009015457704663277,
+      "subgroup_results": {
+        "phu_dinh": {
+          "n": 2402,
+          "accuracy": 0.8380516236469608,
+          "f1_macro": 0.8329435395142936
+        },
+        "hedge": {
+          "n": 280,
+          "accuracy": 0.9464285714285714,
+          "f1_macro": 0.8839924411087394
+        },
+        "trai_chieu": {
+          "n": 1879,
+          "accuracy": 0.8041511442256519,
+          "f1_macro": 0.8076993330678807
+        },
+        "cau_ngan": {
+          "n": 118,
+          "accuracy": 0.9152542372881356,
+          "f1_macro": 0.8646285278413425
+        }
+      },
+      "hyperparams": {
+        "max_length": 192,
+        "batch_size": 32,
+        "grad_accum": 1,
+        "lr": 3e-05,
+        "epochs": 5,
+        "freeze_layers": 0
+      },
+      "best_epoch": 5.0,
+      "best_cal_f1": 0.892484880148893,
+      "cal_curve": [
+        [
+          1.0,
+          0.8359672254013469
+        ],
+        [
+          2.0,
+          0.8708301774935704
+        ],
+        [
+          3.0,
+          0.8747648850911419
+        ],
+        [
+          4.0,
+          0.890719302064444
+        ],
+        [
+          5.0,
+          0.892484880148893
+        ]
+      ],
+      "trunc_rate": {
+        "train": 0.004190401361880443,
+        "cal": 0.0010123506782749544,
+        "test": 0.006696868229269254
+      },
+      "segmenter": "underthesea",
+      "class_weight": null,
+      "weight_decay": 0.01,
+      "warmup_ratio": 0.1,
+      "scheduler": "linear (Trainer default)",
+      "early_stopping_patience": 2,
+      "checkpoint_selection": "best calibration F1-macro (load_best_model_at_end)"
+    },
+    "31337": {
+      "f1": 0.8799439737144716,
+      "accuracy": 0.8842468378689153,
+      "ece": 0.11082908615110107,
+      "brier": 0.22494902764064306,
+      "training_time_sec": 1645.7334570884705,
+      "model_size_mb": 516.9545793533325,
+      "mean_confidence": 0.9950760006904602,
+      "mean_entropy": 0.015125441364943981,
+      "subgroup_results": {
+        "phu_dinh": {
+          "n": 2556,
+          "accuracy": 0.8345070422535211,
+          "f1_macro": 0.832367862236346
+        },
+        "hedge": {
+          "n": 354,
+          "accuracy": 0.847457627118644,
+          "f1_macro": 0.7553065317289557
+        },
+        "trai_chieu": {
+          "n": 2010,
+          "accuracy": 0.8029850746268656,
+          "f1_macro": 0.8053165992539588
+        },
+        "cau_ngan": {
+          "n": 140,
+          "accuracy": 0.9,
+          "f1_macro": 0.8378430537817511
+        }
+      },
+      "hyperparams": {
+        "max_length": 192,
+        "batch_size": 32,
+        "grad_accum": 1,
+        "lr": 3e-05,
+        "epochs": 5,
+        "freeze_layers": 0
+      },
+      "best_epoch": 4.0,
+      "best_cal_f1": 0.8967996633802015,
+      "cal_curve": [
+        [
+          1.0,
+          0.8499132043802553
+        ],
+        [
+          2.0,
+          0.877527742357643
+        ],
+        [
+          3.0,
+          0.8742568737918616
+        ],
+        [
+          4.0,
+          0.8967996633802015
+        ],
+        [
+          5.0,
+          0.8954667674620177
+        ]
+      ],
+      "trunc_rate": {
+        "train": 0.00428380187416332,
+        "cal": 0.002923406743324888,
+        "test": 0.0045994633959371405
+      },
+      "segmenter": "underthesea",
+      "class_weight": null,
+      "weight_decay": 0.01,
+      "warmup_ratio": 0.1,
+      "scheduler": "linear (Trainer default)",
+      "early_stopping_patience": 2,
+      "checkpoint_selection": "best calibration F1-macro (load_best_model_at_end)"
+    },
+    "8080": {
+      "f1": 0.9055774706671555,
+      "accuracy": 0.9079566373491511,
+      "ece": 0.08841734763717188,
+      "brier": 0.1795411695433979,
+      "training_time_sec": 1668.7547082901,
+      "model_size_mb": 516.9545669555664,
+      "mean_confidence": 0.9963312745094299,
+      "mean_entropy": 0.009992361068725586,
+      "subgroup_results": {
+        "phu_dinh": {
+          "n": 2321,
+          "accuracy": 0.8978888410168031,
+          "f1_macro": 0.8900144337997292
+        },
+        "hedge": {
+          "n": 262,
+          "accuracy": 0.9694656488549618,
+          "f1_macro": 0.9558435928559043
+        },
+        "trai_chieu": {
+          "n": 1726,
+          "accuracy": 0.8684820393974507,
+          "f1_macro": 0.8681807647946037
+        },
+        "cau_ngan": {
+          "n": 110,
+          "accuracy": 0.9454545454545454,
+          "f1_macro": 0.959375
+        }
+      },
+      "hyperparams": {
+        "max_length": 192,
+        "batch_size": 32,
+        "grad_accum": 1,
+        "lr": 3e-05,
+        "epochs": 5,
+        "freeze_layers": 0
+      },
+      "best_epoch": 5.0,
+      "best_cal_f1": 0.8821473940194489,
+      "cal_curve": [
+        [
+          1.0,
+          0.8367684645131129
+        ],
+        [
+          2.0,
+          0.8573590499613538
+        ],
+        [
+          3.0,
+          0.8734484315162859
+        ],
+        [
+          4.0,
+          0.8765650217124602
+        ],
+        [
+          5.0,
+          0.8821473940194489
+        ]
+      ],
+      "trunc_rate": {
+        "train": 0.004062909567496723,
+        "cal": 0.0031128404669260703,
+        "test": 0.005113520147269381
+      },
+      "segmenter": "underthesea",
+      "class_weight": null,
+      "weight_decay": 0.01,
+      "warmup_ratio": 0.1,
+      "scheduler": "linear (Trainer default)",
+      "early_stopping_patience": 2,
+      "checkpoint_selection": "best calibration F1-macro (load_best_model_at_end)"
+    },
+    "12321": {
+      "f1": 0.8850963464877223,
+      "accuracy": 0.8900096993210476,
+      "ece": 0.10642558159351814,
+      "brier": 0.21586472629465828,
+      "training_time_sec": 1655.4519429206848,
+      "model_size_mb": 516.9545669555664,
+      "mean_confidence": 0.9964110851287842,
+      "mean_entropy": 0.009238284081220627,
+      "subgroup_results": {
+        "phu_dinh": {
+          "n": 2474,
+          "accuracy": 0.8447857720291027,
+          "f1_macro": 0.8426215547379865
+        },
+        "hedge": {
+          "n": 315,
+          "accuracy": 0.9714285714285714,
+          "f1_macro": 0.9578742522508912
+        },
+        "trai_chieu": {
+          "n": 1851,
+          "accuracy": 0.8314424635332253,
+          "f1_macro": 0.8342567906117652
+        },
+        "cau_ngan": {
+          "n": 140,
+          "accuracy": 0.9642857142857143,
+          "f1_macro": 0.9456938725231407
+        }
+      },
+      "hyperparams": {
+        "max_length": 192,
+        "batch_size": 32,
+        "grad_accum": 1,
+        "lr": 3e-05,
+        "epochs": 5,
+        "freeze_layers": 0
+      },
+      "best_epoch": 5.0,
+      "best_cal_f1": 0.9002642041540033,
+      "cal_curve": [
+        [
+          1.0,
+          0.864832746141285
+        ],
+        [
+          2.0,
+          0.874678884412126
+        ],
+        [
+          3.0,
+          0.8688882659746019
+        ],
+        [
+          4.0,
+          0.8960789573455545
+        ],
+        [
+          5.0,
+          0.9002642041540033
+        ]
+      ],
+      "trunc_rate": {
+        "train": 0.005899118446344535,
+        "cal": 0.0005944125222904696,
+        "test": 0.002133850630455868
+      },
+      "segmenter": "underthesea",
+      "class_weight": null,
+      "weight_decay": 0.01,
+      "warmup_ratio": 0.1,
+      "scheduler": "linear (Trainer default)",
+      "early_stopping_patience": 2,
+      "checkpoint_selection": "best calibration F1-macro (load_best_model_at_end)"
+    }
+  },
+  "summary": {
+    "f1": {
+      "mean": 0.8805057196127711,
+      "std": 0.012720521275857134
+    },
+    "accuracy": {
+      "mean": 0.8853916629710714,
+      "std": 0.011016628632675695
+    },
+    "ece": {
+      "mean": 0.10881313382553895,
+      "std": 0.007625815920972626
+    },
+    "brier": {
+      "mean": 0.22155973923659303,
+      "std": 0.017844974071215422
+    },
+    "training_time_sec": {
+      "mean": 1658.0372539997102,
+      "std": 12.65361201094648
+    },
+    "model_size_mb": {
+      "mean": 516.9544652938843,
+      "std": 0.0003314048300407887
+    },
+    "mean_confidence": {
+      "mean": 0.9940536975860595,
+      "std": 0.005064642368632239
+    },
+    "mean_entropy": {
+      "mean": 0.017997324280440808,
+      "std": 0.017409530081237308
+    }
+  },
+  "completed_seeds": 10,
+  "total_seeds": 10
+}

@@ -1,0 +1,455 @@
+{
+  "version": "phobert",
+  "model_name": "vinai/phobert-base-v2",
+  "seeds": [
+    42,
+    7,
+    123,
+    2024,
+    99,
+    555,
+    2026,
+    31337,
+    8080,
+    12321
+  ],
+  "group_col": "near_dup_group_id",
+  "metrics_by_seed": {
+    "42": {
+      "f1": 0.8780805213331747,
+      "accuracy": 0.8829727187206021,
+      "ece": 0.09536362203470632,
+      "brier": 0.2140660697872704,
+      "training_time_sec": 1259.3454611301422,
+      "model_size_mb": 516.9528732299805,
+      "mean_confidence": 0.9783158898353577,
+      "mean_entropy": 0.08531205356121063,
+      "subgroup_results": {
+        "phu_dinh": {
+          "n": 2632,
+          "accuracy": 0.8465045592705167,
+          "f1_macro": 0.8516390555335963
+        },
+        "hedge": {
+          "n": 248,
+          "accuracy": 0.8709677419354839,
+          "f1_macro": 0.8273887497591986
+        },
+        "trai_chieu": {
+          "n": 2005,
+          "accuracy": 0.8149625935162095,
+          "f1_macro": 0.8179695226776813
+        },
+        "cau_ngan": {
+          "n": 127,
+          "accuracy": 0.8503937007874016,
+          "f1_macro": 0.7592254894511562
+        }
+      },
+      "hyperparams": {
+        "max_length": 192,
+        "batch_size": 32,
+        "grad_accum": 1,
+        "lr": 2e-05,
+        "epochs": 4,
+        "freeze_layers": 0
+      }
+    },
+    "7": {
+      "f1": 0.8729348592593755,
+      "accuracy": 0.8798441664957966,
+      "ece": 0.09926515118567844,
+      "brier": 0.22147242943665774,
+      "training_time_sec": 1293.787445783615,
+      "model_size_mb": 516.9539804458618,
+      "mean_confidence": 0.9790168404579163,
+      "mean_entropy": 0.0822916105389595,
+      "subgroup_results": {
+        "phu_dinh": {
+          "n": 2313,
+          "accuracy": 0.8495460440985733,
+          "f1_macro": 0.8465296397458376
+        },
+        "hedge": {
+          "n": 305,
+          "accuracy": 0.8688524590163934,
+          "f1_macro": 0.8069392422492153
+        },
+        "trai_chieu": {
+          "n": 1770,
+          "accuracy": 0.8429378531073446,
+          "f1_macro": 0.8426517628570775
+        },
+        "cau_ngan": {
+          "n": 122,
+          "accuracy": 0.9016393442622951,
+          "f1_macro": 0.8491861251235114
+        }
+      },
+      "hyperparams": {
+        "max_length": 192,
+        "batch_size": 32,
+        "grad_accum": 1,
+        "lr": 2e-05,
+        "epochs": 4,
+        "freeze_layers": 0
+      }
+    },
+    "123": {
+      "f1": 0.8457371517787745,
+      "accuracy": 0.8531183213522441,
+      "ece": 0.12238192348682184,
+      "brier": 0.26877378944155506,
+      "training_time_sec": 1277.051613330841,
+      "model_size_mb": 516.9539766311646,
+      "mean_confidence": 0.9754050374031067,
+      "mean_entropy": 0.09275925159454346,
+      "subgroup_results": {
+        "phu_dinh": {
+          "n": 2483,
+          "accuracy": 0.8095046314941603,
+          "f1_macro": 0.7984188626462941
+        },
+        "hedge": {
+          "n": 420,
+          "accuracy": 0.8261904761904761,
+          "f1_macro": 0.7660198162123312
+        },
+        "trai_chieu": {
+          "n": 1965,
+          "accuracy": 0.7867684478371502,
+          "f1_macro": 0.7821904477341998
+        },
+        "cau_ngan": {
+          "n": 126,
+          "accuracy": 0.8809523809523809,
+          "f1_macro": 0.7313097417124262
+        }
+      },
+      "hyperparams": {
+        "max_length": 192,
+        "batch_size": 32,
+        "grad_accum": 1,
+        "lr": 2e-05,
+        "epochs": 4,
+        "freeze_layers": 0
+      }
+    },
+    "2024": {
+      "f1": 0.8488847267807498,
+      "accuracy": 0.8616214057507987,
+      "ece": 0.11205114446247154,
+      "brier": 0.25406693033680655,
+      "training_time_sec": 1286.115907907486,
+      "model_size_mb": 516.9539813995361,
+      "mean_confidence": 0.9736725687980652,
+      "mean_entropy": 0.09519341588020325,
+      "subgroup_results": {
+        "phu_dinh": {
+          "n": 2345,
+          "accuracy": 0.8132196162046909,
+          "f1_macro": 0.808398485011947
+        },
+        "hedge": {
+          "n": 300,
+          "accuracy": 0.8466666666666667,
+          "f1_macro": 0.8200067527466767
+        },
+        "trai_chieu": {
+          "n": 1924,
+          "accuracy": 0.7650727650727651,
+          "f1_macro": 0.7696492700906084
+        },
+        "cau_ngan": {
+          "n": 136,
+          "accuracy": 0.9117647058823529,
+          "f1_macro": 0.8590441891382424
+        }
+      },
+      "hyperparams": {
+        "max_length": 192,
+        "batch_size": 32,
+        "grad_accum": 1,
+        "lr": 2e-05,
+        "epochs": 4,
+        "freeze_layers": 0
+      }
+    },
+    "99": {
+      "f1": 0.8687330159229466,
+      "accuracy": 0.8734410141075445,
+      "ece": 0.1053971229606649,
+      "brier": 0.2306118759526081,
+      "training_time_sec": 1294.6320655345917,
+      "model_size_mb": 516.9539804458618,
+      "mean_confidence": 0.9786116480827332,
+      "mean_entropy": 0.0816408023238182,
+      "subgroup_results": {
+        "phu_dinh": {
+          "n": 2208,
+          "accuracy": 0.8315217391304348,
+          "f1_macro": 0.825430869296977
+        },
+        "hedge": {
+          "n": 282,
+          "accuracy": 0.9397163120567376,
+          "f1_macro": 0.8984219725343321
+        },
+        "trai_chieu": {
+          "n": 1991,
+          "accuracy": 0.8111501757910597,
+          "f1_macro": 0.8138785908077697
+        },
+        "cau_ngan": {
+          "n": 121,
+          "accuracy": 0.9008264462809917,
+          "f1_macro": 0.8295618680789602
+        }
+      },
+      "hyperparams": {
+        "max_length": 192,
+        "batch_size": 32,
+        "grad_accum": 1,
+        "lr": 2e-05,
+        "epochs": 4,
+        "freeze_layers": 0
+      }
+    },
+    "555": {
+      "f1": 0.8574069759528494,
+      "accuracy": 0.8663767542992686,
+      "ece": 0.10599444829255941,
+      "brier": 0.23800306550566172,
+      "training_time_sec": 1290.224637746811,
+      "model_size_mb": 516.9539766311646,
+      "mean_confidence": 0.9716252684593201,
+      "mean_entropy": 0.10362374782562256,
+      "subgroup_results": {
+        "phu_dinh": {
+          "n": 2436,
+          "accuracy": 0.8378489326765188,
+          "f1_macro": 0.8211819273977636
+        },
+        "hedge": {
+          "n": 356,
+          "accuracy": 0.851123595505618,
+          "f1_macro": 0.7977539719505252
+        },
+        "trai_chieu": {
+          "n": 1995,
+          "accuracy": 0.7989974937343358,
+          "f1_macro": 0.7972679503071934
+        },
+        "cau_ngan": {
+          "n": 126,
+          "accuracy": 0.9206349206349206,
+          "f1_macro": 0.8532132801138649
+        }
+      },
+      "hyperparams": {
+        "max_length": 192,
+        "batch_size": 32,
+        "grad_accum": 1,
+        "lr": 2e-05,
+        "epochs": 4,
+        "freeze_layers": 0
+      }
+    },
+    "2026": {
+      "f1": 0.8805572395820254,
+      "accuracy": 0.8849714398266693,
+      "ece": 0.0911211120770018,
+      "brier": 0.208611158660674,
+      "training_time_sec": 1291.6287651062012,
+      "model_size_mb": 516.9539813995361,
+      "mean_confidence": 0.9756773710250854,
+      "mean_entropy": 0.08991282433271408,
+      "subgroup_results": {
+        "phu_dinh": {
+          "n": 2402,
+          "accuracy": 0.8417985012489592,
+          "f1_macro": 0.835462476720795
+        },
+        "hedge": {
+          "n": 280,
+          "accuracy": 0.8785714285714286,
+          "f1_macro": 0.78773204196933
+        },
+        "trai_chieu": {
+          "n": 1879,
+          "accuracy": 0.817456093666844,
+          "f1_macro": 0.8205422341871174
+        },
+        "cau_ngan": {
+          "n": 118,
+          "accuracy": 0.8983050847457628,
+          "f1_macro": 0.8096607743267086
+        }
+      },
+      "hyperparams": {
+        "max_length": 192,
+        "batch_size": 32,
+        "grad_accum": 1,
+        "lr": 2e-05,
+        "epochs": 4,
+        "freeze_layers": 0
+      }
+    },
+    "31337": {
+      "f1": 0.8672979527572556,
+      "accuracy": 0.8731314679954005,
+      "ece": 0.09067570915300757,
+      "brier": 0.22284614952959744,
+      "training_time_sec": 1273.447258234024,
+      "model_size_mb": 516.9539747238159,
+      "mean_confidence": 0.9637094140052795,
+      "mean_entropy": 0.1313653141260147,
+      "subgroup_results": {
+        "phu_dinh": {
+          "n": 2556,
+          "accuracy": 0.8286384976525821,
+          "f1_macro": 0.8262072730803388
+        },
+        "hedge": {
+          "n": 354,
+          "accuracy": 0.768361581920904,
+          "f1_macro": 0.6624747573447983
+        },
+        "trai_chieu": {
+          "n": 2010,
+          "accuracy": 0.7875621890547264,
+          "f1_macro": 0.7908374750774327
+        },
+        "cau_ngan": {
+          "n": 140,
+          "accuracy": 0.8428571428571429,
+          "f1_macro": 0.7441921374505643
+        }
+      },
+      "hyperparams": {
+        "max_length": 192,
+        "batch_size": 32,
+        "grad_accum": 1,
+        "lr": 2e-05,
+        "epochs": 4,
+        "freeze_layers": 0
+      }
+    },
+    "8080": {
+      "f1": 0.8853866433477279,
+      "accuracy": 0.8911842912661075,
+      "ece": 0.0877847365621995,
+      "brier": 0.19903189921703457,
+      "training_time_sec": 1294.3167281150818,
+      "model_size_mb": 516.9539813995361,
+      "mean_confidence": 0.9766531586647034,
+      "mean_entropy": 0.0929684266448021,
+      "subgroup_results": {
+        "phu_dinh": {
+          "n": 2321,
+          "accuracy": 0.8716070659198621,
+          "f1_macro": 0.8641171954023918
+        },
+        "hedge": {
+          "n": 262,
+          "accuracy": 0.9618320610687023,
+          "f1_macro": 0.9459395096095536
+        },
+        "trai_chieu": {
+          "n": 1726,
+          "accuracy": 0.8383545770567786,
+          "f1_macro": 0.8389918432186837
+        },
+        "cau_ngan": {
+          "n": 110,
+          "accuracy": 0.9363636363636364,
+          "f1_macro": 0.9523762797239393
+        }
+      },
+      "hyperparams": {
+        "max_length": 192,
+        "batch_size": 32,
+        "grad_accum": 1,
+        "lr": 2e-05,
+        "epochs": 4,
+        "freeze_layers": 0
+      }
+    },
+    "12321": {
+      "f1": 0.8787908156377434,
+      "accuracy": 0.8853540252182347,
+      "ece": 0.08919686903430926,
+      "brier": 0.20635088875445337,
+      "training_time_sec": 1280.7424201965332,
+      "model_size_mb": 516.9539794921875,
+      "mean_confidence": 0.9745510220527649,
+      "mean_entropy": 0.0911080464720726,
+      "subgroup_results": {
+        "phu_dinh": {
+          "n": 2474,
+          "accuracy": 0.8500404203718674,
+          "f1_macro": 0.8486169775698128
+        },
+        "hedge": {
+          "n": 315,
+          "accuracy": 0.9365079365079365,
+          "f1_macro": 0.9103443704219284
+        },
+        "trai_chieu": {
+          "n": 1851,
+          "accuracy": 0.8373851971907077,
+          "f1_macro": 0.8377692485100781
+        },
+        "cau_ngan": {
+          "n": 140,
+          "accuracy": 0.9357142857142857,
+          "f1_macro": 0.8492058786716995
+        }
+      },
+      "hyperparams": {
+        "max_length": 192,
+        "batch_size": 32,
+        "grad_accum": 1,
+        "lr": 2e-05,
+        "epochs": 4,
+        "freeze_layers": 0
+      }
+    }
+  },
+  "summary": {
+    "f1": {
+      "mean": 0.8683809902352622,
+      "std": 0.01294299025696837
+    },
+    "accuracy": {
+      "mean": 0.8752015605032666,
+      "std": 0.011372192051243622
+    },
+    "ece": {
+      "mean": 0.09992318392494207,
+      "std": 0.010793133348561527
+    },
+    "brier": {
+      "mean": 0.22638342566223185,
+      "std": 0.020904125584905033
+    },
+    "training_time_sec": {
+      "mean": 1284.1292303085327,
+      "std": 10.929879113309175
+    },
+    "model_size_mb": {
+      "mean": 516.9538685798645,
+      "std": 0.00033179097003616944
+    },
+    "mean_confidence": {
+      "mean": 0.9747238218784332,
+      "std": 0.0042848221810572905
+    },
+    "mean_entropy": {
+      "mean": 0.09461754932999611,
+      "std": 0.013709056700917177
+    }
+  },
+  "completed_seeds": 10,
+  "total_seeds": 10
+}

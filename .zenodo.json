@@ -1,0 +1,14 @@
+{
+  "title": "AERS-Pro: code, PII-masked corpus and per-sample predictions for Vietnamese e-commerce sentiment analysis",
+  "upload_type": "software",
+  "description": "<p>Research artifact accompanying the manuscript <em>A Hybrid Machine Learning Framework for Vietnamese Sentiment Analysis in E-Commerce</em> (manuscript QNUJS-B2662, under review at the Journal of Science - Quy Nhon University).</p><p>AERS-Pro is a stacking ensemble for three-class (negative / neutral / positive) Vietnamese review sentiment. It combines word TF-IDF, hashed character n-grams, lexicon and part-of-speech features, out-of-fold stacking of logistic regression, LinearSVC and LightGBM base learners, and conditional probability calibration. It is compared with a fine-tuned PhoBERT baseline over 10 seeds using group-aware (near-duplicate-safe) 60/20/20 splits.</p><p>Contents: source code; a PII-masked corpus of 25,289 Vietnamese e-commerce reviews (phone numbers, URLs and social-media handles replaced by placeholders; personal names and addresses were not screened); per-sample predictions of both systems for all 10 seeds (row index, label, logits or probabilities; no review text); split audits; statistical tables (Nadeau-Bengio corrected tests, TOST, Holm adjustment); training logs; SHA-256 manifest. Review texts were collected from a public e-commerce platform for non-commercial research; the corpus is provided for research use only.</p>",
+  "creators": [
+    { "name": "Lê, Quang Phát" },
+    { "name": "Trần, Trọng Kiên" },
+    { "name": "Đinh, Thị Hồng Huyên" }
+  ],
+  "keywords": ["Vietnamese", "sentiment analysis", "e-commerce reviews", "stacking ensemble", "probability calibration", "PhoBERT", "reproducibility"],
+  "access_right": "open",
+  "license": "mit",
+  "language": "eng"
+}

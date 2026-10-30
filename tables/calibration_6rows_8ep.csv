@@ -1,0 +1,9 @@
+system,F1,ECE,Brier
+AERS-Pro stacking raw (ablation env),0.8622,0.0262,0.1984
+AERS-Pro + TS (ablation env),0.8622,0.0246,0.1986
+AERS-Pro + Platt3x3 always (ablation env),0.8645,0.0247,0.1955
+AERS-Pro final rule (ablation env),0.8628,0.0249,0.1980
+AERS-Pro published run (original),0.8665,0.0241,0.1946
+PhoBERT 8ep raw,0.8834,0.1069,0.2177
+PhoBERT 8ep + TS,0.8834,0.0314,0.1940
+PhoBERT 8ep + Platt3x3,0.8834,0.0225,0.1919

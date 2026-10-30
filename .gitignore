@@ -1,0 +1,9 @@
+﻿__pycache__/
+*.pyc
+.ipynb_checkpoints/
+models/
+logs/
+scratch/
+*.pkl
+data/dataset_cleaned.csv
+docs/~$*

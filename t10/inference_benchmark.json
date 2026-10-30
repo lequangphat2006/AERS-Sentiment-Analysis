@@ -1,0 +1,36 @@
+{
+ "model_size_total_mb": 8.153614044189453,
+ "model_size_by_file_mb": {
+  "base_learners.pkl": 7.331550598144531,
+  "clusterer.pkl": 0.05786705017089844,
+  "feature_pipeline.pkl": 0.7611122131347656,
+  "label_encoder.pkl": 0.00048160552978515625,
+  "learner_names.pkl": 3.24249267578125e-05,
+  "meta_learner.pkl": 0.0015420913696289062,
+  "neutral_threshold.pkl": 2.002716064453125e-05,
+  "probability_calibrator.pkl": 0.0010080337524414062
+ },
+ "latency_single_ms": {
+  "median": 170.98816399993666,
+  "p95": 511.0444481511877,
+  "mean": 238.8010579633677,
+  "n": 300
+ },
+ "batch": {
+  "32": {
+   "sec": 0.7818390459979128,
+   "ms_per_sample": 24.432470187434774,
+   "samples_per_sec": 40.92914029275206
+  },
+  "256": {
+   "sec": 1.4095777990005445,
+   "ms_per_sample": 5.506163277345877,
+   "samples_per_sec": 181.61466517244793
+  },
+  "1000": {
+   "sec": 3.8587550330012164,
+   "ms_per_sample": 3.8587550330012164,
+   "samples_per_sec": 259.1509415466138
+  }
+ }
+}
