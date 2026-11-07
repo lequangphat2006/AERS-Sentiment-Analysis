@@ -7,11 +7,21 @@ from sklearn.metrics import f1_score, confusion_matrix
 from sklearn.model_selection import StratifiedGroupKFold
 sys.path.insert(0, sys.argv[1]); R, O = sys.argv[1], sys.argv[2]
 SEEDS = [42, 7, 123, 2024, 99, 555, 2026, 31337, 8080, 12321]
-df = pd.read_csv(f'{R}/input_data/dataset_cleaned.csv', encoding='utf-8-sig')
+import os
+def first_existing(*cands):
+    for c in cands:
+        if os.path.exists(c): return c
+    sys.exit('[DUNG] Khong thay file: ' + ' | '.join(cands))
+# Corpus: mac dinh la ban DA CHE PII trong repo. Muon dung ban goc: set AERS_CORPUS=<duong dan>.
+CORPUS = os.environ.get('AERS_CORPUS') or first_existing(f'{R}/data/dataset_cleaned_masked.csv', f'{R}/input_data/dataset_cleaned.csv')
+print('Corpus dang dung:', CORPUS, '(PII-masked)' if 'masked' in os.path.basename(CORPUS) else '(BAN GOC - khong cong bo)')
+df = pd.read_csv(CORPUS, encoding='utf-8-sig')
+PROBS = first_existing(f'{R}/results/v40_probs', f'{R}/reports/v40_probs')
+def probs_path(s): return f'{PROBS}/v40_test_seed_{s}.csv'
 cls = ['negative', 'neutral', 'positive']; y = df.sentiment.map({c: i for i, c in enumerate(cls)}).values
 g = df.near_dup_group_id.values; ia = np.arange(len(df))
-A = json.load(open(f'{R}/results_v40_multiseed.json'))['metrics_by_seed']
-P = json.load(open(f'{R}/results_phobert_multiseed.json'))['metrics_by_seed']
+A = json.load(open(first_existing(f'{R}/results/results_v40_multiseed.json', f'{R}/results_v40_multiseed.json')))['metrics_by_seed']
+P = json.load(open(first_existing(f'{R}/results/results_phobert_multiseed.json', f'{R}/results_phobert_multiseed.json')))['metrics_by_seed']
 # --- ham dung chung (copy tu train_v40.compute_calibration_metrics, n_bins tham so)
 def calib(yt, p, nb=10):
     br = float(np.mean(np.sum((p-np.eye(3)[yt])**2, 1))); conf = p.max(1); acc = (p.argmax(1) == yt).astype(float)
@@ -39,9 +49,13 @@ res = []; cm_total = None; sub_rows = []; nd_rows = []; ece_rows = []
 for s in SEEDS:
     a, te = next(iter(StratifiedGroupKFold(5, shuffle=True, random_state=s).split(ia, y, g)))
     r, c = next(iter(StratifiedGroupKFold(4, shuffle=True, random_state=s).split(a, y[a], g[a]))); tr = a[r]
-    p = pd.read_csv(f'{R}/reports/v40_probs/v40_test_seed_{s}.csv', encoding='utf-8-sig')
-    # khop thu tu hang voi te
-    assert (p.text.astype(str).values == df.comment.values[te].astype(str)).all(), 'thu tu khac'
+    p = pd.read_csv(probs_path(s), encoding='utf-8-sig')
+    # khop thu tu hang voi te: bang row_index (file moi, khong co cot text); file cu con cot text thi doi chieu van ban
+    if 'row_index' in p.columns:
+        assert (p.row_index.values == te).all(), f'seed {s}: row_index khac chi so test tinh lai (sai ban sklearn? can 1.6.1)'
+    else:
+        assert (p.text.astype(str).values == df.comment.values[te].astype(str)).all(), 'thu tu khac'
+    assert (p.y_true.astype(str).values == np.array(cls)[y[te]]).all(), f'seed {s}: y_true khac nhan corpus tai te'
     yt = y[te]; pr = p[['p_negative', 'p_neutral', 'p_positive']].values; pred = pr.argmax(1)
     f1 = f1_score(yt, pred, average='macro'); assert abs(f1-A[str(s)]['f1']) < 1e-9, (s, f1, A[str(s)]['f1'])
     e, b = calib(yt, pr); assert abs(e-A[str(s)]['ece']) < 1e-9 and abs(b-A[str(s)]['brier']) < 1e-9
@@ -82,5 +96,5 @@ def holm(p):
     for i, j in enumerate(o): run = max(run, (len(p)-i)*p[j]); adj[j] = min(1, run)
     return adj
 for t, h in zip(rr, holm(ps)): print(f'  {t[0]:11s} n~{t[1]:.0f} [{t[2]},{t[3]}] dF1={t[4]:+.4f} NB-CI[{t[5]:+.4f},{t[6]:+.4f}] p_NB={t[7]:.4f} holm={h:.4f}')
-x = sub[sub.group == 'cau_ngan']; print('  cau_ngan class counts (mean/seed):', x[['n_negative', 'n_neutral', 'n_positive']].mean().round(1).to_dict(), ' share of test=%.3f' % (x.n.mean()/np.mean([len(pd.read_csv(f'{R}/reports/v40_probs/v40_test_seed_{s}.csv', encoding="utf-8-sig")) for s in SEEDS])))
+x = sub[sub.group == 'cau_ngan']; print('  cau_ngan class counts (mean/seed):', x[['n_negative', 'n_neutral', 'n_positive']].mean().round(1).to_dict(), ' share of test=%.3f' % (x.n.mean()/np.mean([len(pd.read_csv(probs_path(s), encoding="utf-8-sig")) for s in SEEDS])))
 er = pd.DataFrame(ece_rows).groupby('bins').ece_aers.mean(); print('\nAERS ECE theo so bin:', er.round(4).to_dict())
