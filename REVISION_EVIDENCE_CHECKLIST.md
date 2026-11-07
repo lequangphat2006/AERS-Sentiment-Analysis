@@ -53,3 +53,12 @@ This document maps each reviewer request to the evidence in this repository and 
 
 
 Zenodo DOI of the clean release: https://doi.org/10.5281/zenodo.23797912
+
+## Final Limitations (Updated 07/11)
+*   **LLM & Crawl:** Original server logs for LLM-flagging and exact two-phase crawl numbers were lost. Cannot be reconstructed.
+*   **Word Segmentation:** Used underthesea. RDRSegmenter was not evaluated due to GPU limits.
+*   **ViSoBERT:** Not compared due to compute budget. Left for future work.
+*   **Data Noise:** Small fraction of AI-generated/template texts exist, reflecting real e-commerce noise.
+*   **PII:** Masked phones/URLs, but did not scan for personal names/addresses.
+*   **Optuna:** Hyperparameters not reproducible across environments (best_params differed 10/10 seeds).
+*   **AERS-Pro vs PhoBERT:** PhoBERT wins on F1 (0.8834 vs 0.8665). AERS-Pro wins on size (69x smaller) and raw calibration.
