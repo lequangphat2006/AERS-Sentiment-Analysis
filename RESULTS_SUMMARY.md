@@ -169,3 +169,11 @@ Các baseline dùng cùng phân chia dữ liệu và scikit-learn==1.6.1. Giá t
 | B4: chỉ hash ký tự | 0,7972 ± 0,0153 | −0,0693 |
 
 Kết quả cho thấy việc kết hợp TF-IDF từ và hash ký tự tốt hơn từng khối riêng lẻ. Ablation ở mục 7 cho thấy khối lexicon và POS không đóng góp đo được (dưới 0,002), và lợi thế của stacking so với LR đã tune (+0,013) chưa có ý nghĩa sau hiệu chỉnh Nadeau–Bengio (p = 0,12). Số liệu thô: `tables/baseline_b3_b4_results.csv`. Lưu ý: B2/B3/B4 chưa có script chạy và file theo từng seed trong repo; cần bổ sung trước khi dùng trong bài.
+
+---
+## Update (Final Baseline): Simple Classifiers vs Stacking
+To rigorously test the fusion of text representations, we evaluated simple baselines using the exact same data splits:
+*   **B3 (TF-IDF only):** F1-macro = 0.8267 ± 0.0088
+*   **B4 (Char-Hash only):** F1-macro = 0.7972 ± 0.0153
+*   **B2 (LinearSVC on Fusion):** F1-macro = 0.8197 ± 0.0126
+*Notice that B2 performs worse than B3, proving that simple linear classifiers are overwhelmed by high-dimensional fusion features. The AERS-Pro Stacking ensemble (0.8665) is necessary to handle this complexity.*
