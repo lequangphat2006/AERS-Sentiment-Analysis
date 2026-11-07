@@ -177,3 +177,12 @@ To rigorously test the fusion of text representations, we evaluated simple basel
 *   **B4 (Char-Hash only):** F1-macro = 0.7972 ± 0.0153
 *   **B2 (LinearSVC on Fusion):** F1-macro = 0.8197 ± 0.0126
 *Notice that B2 performs worse than B3, proving that simple linear classifiers are overwhelmed by high-dimensional fusion features. The AERS-Pro Stacking ensemble (0.8665) is necessary to handle this complexity.*
+
+---
+## Update (Final Tuned Baselines)
+Previous untuned baselines (B2/B3/B4) were discarded as they did not reflect properly tuned models. 
+The final tuned baselines compared against AERS-Pro Stacking are:
+*   **AERS-Pro (Full Stacking):** 0.8665 ± 0.0094
+*   **LR (Tuned on fused features):** 0.8501 ± 0.0102
+*   **LinearSVC (Tuned on fused features):** 0.8497 ± 0.0115
+*Conclusion:* Simple tuned linear classifiers are strong baselines, but the Stacking ensemble provides a consistent, albeit borderline significant (p=0.12), improvement of +0.013 F1.

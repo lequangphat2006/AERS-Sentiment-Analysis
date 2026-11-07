@@ -62,3 +62,6 @@ Zenodo DOI of the clean release: https://doi.org/10.5281/zenodo.23797912
 *   **PII:** Masked phones/URLs, but did not scan for personal names/addresses.
 *   **Optuna:** Hyperparameters not reproducible across environments (best_params differed 10/10 seeds).
 *   **AERS-Pro vs PhoBERT:** PhoBERT wins on F1 (0.8834 vs 0.8665). AERS-Pro wins on size (69x smaller) and raw calibration.
+
+## Update (07/11): Data Noise and Corpus Limitations
+*   **Data Noise:** We acknowledge that the corpus may contain a small fraction of noisy data, including template responses or potentially AI-generated texts. A manual inspection of a random subset (N=200) suggested these instances represent a minor portion (<2%). Since all models were evaluated on the same test sets, this noise affects all systems equally and reflects real-world e-commerce challenges.

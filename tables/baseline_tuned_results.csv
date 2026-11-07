@@ -1,0 +1,4 @@
+﻿Model,F1_Macro_Mean,F1_Macro_Std,Notes
+AERS-Pro (Full Stacking),0.8665,0.0094,Proposed Model
+LR (Tuned on Fusion),0.8501,0.0102,Tuned baseline from ablation
+LinearSVC (Tuned on Fusion),0.8497,0.0115,Tuned baseline from ablation
