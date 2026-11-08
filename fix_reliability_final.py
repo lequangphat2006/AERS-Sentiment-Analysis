@@ -5,25 +5,23 @@ from sklearn.calibration import calibration_curve
 import glob, os
 
 print("Đang vẽ lại biểu đồ Reliability...")
-# Tự động tìm file
 v40_path = glob.glob("**/v40_test_seed_42.csv", recursive=True)[0]
 pho_path = glob.glob("**/phobert_test_seed_42.csv", recursive=True)[0]
 
 df_v40 = pd.read_csv(v40_path)
 df_pho = pd.read_csv(pho_path)
 
-# Lấy nhãn thật và ÉP SANG SỐ (0,1,2) để tránh lỗi so sánh chuỗi vs số
+# SỬA LỖI: Ép kiểu chữ về dạng chuẩn, map sang số, bất kể Pandas phiên bản nào
 label_map = {'negative': 0, 'neutral': 1, 'positive': 2}
-if df_v40['y_true'].dtype == object:
-    y_true = df_v40['y_true'].map(label_map).values
-else:
-    y_true = df_v40['y_true'].astype(int).values
+y_true = df_v40['y_true'].astype(str).str.lower().str.strip().map(label_map).values
 
 def get_calib_data(df, prob_cols):
     probs = df[prob_cols].values
+    # Đảm bảo tổng xác suất = 1 (tránh lỗi làm tròn)
+    probs = probs / probs.sum(axis=1, keepdims=True)
     confidences = np.max(probs, axis=1)
     predictions = np.argmax(probs, axis=1)
-    accuracies = (predictions == y_true).astype(float) # Bây giờ cả 2 đều là số
+    accuracies = (predictions == y_true).astype(float)
     return calibration_curve(accuracies, confidences, n_bins=10, strategy='uniform')
 
 plt.figure(figsize=(6, 5))

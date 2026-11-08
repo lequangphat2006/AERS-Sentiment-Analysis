@@ -7,3 +7,5 @@ scratch/
 *.pkl
 data/dataset_cleaned.csv
 docs/~$*
+
+*.zip
