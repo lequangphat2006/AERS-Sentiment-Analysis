@@ -1,4 +1,4 @@
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23797912.svg)](https://doi.org/10.5281/zenodo.23797912)
+﻿[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23797912.svg)](https://doi.org/10.5281/zenodo.23797912)
 
 
 # AERS-Pro: A Hybrid Stacking Framework for Vietnamese E-commerce Sentiment Analysis
@@ -45,9 +45,9 @@ The pipeline is implemented in `src/train_v40.py` and runs in the following stag
 - **Clause-boundary-aware negation handling**:
   - Negation scope is tracked per clause rather than with a fixed token window.
   - Even/odd negation counts drive sign flipping, which handles double negation.
-  - Lookahead rules avoid misreading tag-questions (`...không?`, `...không vậy?`) and locational "đâu" as negation.
-- **Contrast-marker reweighting** ("nhưng", "tuy nhiên", "mà", ...): the clause before the marker is downweighted (0.5x) and the clause after keeps full weight, implemented as a single buffer-and-flush pass over clauses.
-- **Punctuation-safe tokenization**: lexicon and multi-word phrase matching (compound terms joined with `_`) does not silently fail on punctuation-glued tokens such as `"tốt,"` or `"hỏng!"`.
+  - Lookahead rules avoid misreading tag-questions (`...khÃ´ng?`, `...khÃ´ng váº­y?`) and locational "Ä‘Ã¢u" as negation.
+- **Contrast-marker reweighting** ("nhÆ°ng", "tuy nhiÃªn", "mÃ ", ...): the clause before the marker is downweighted (0.5x) and the clause after keeps full weight, implemented as a single buffer-and-flush pass over clauses.
+- **Punctuation-safe tokenization**: lexicon and multi-word phrase matching (compound terms joined with `_`) does not silently fail on punctuation-glued tokens such as `"tá»‘t,"` or `"há»ng!"`.
 
 ### 2. Manual (Lexicon) Feature Extraction (`TextPreprocessor.extract_features`, `MetaFeatureExtractor`)
 
@@ -94,39 +94,39 @@ A roughly 60/20/20 Train/Calibration/Test split is produced by `StratifiedGroupK
 
 ```text
 .
-├── src/
-│   ├── train_v40.py                    # Full pipeline: preprocessing, features, base learners, stacking, calibration
-│   ├── train_phobert_v2.py             # PhoBERT baseline: hyperparameter sweep, multi-seed runner, logits export
-│   ├── seeds_config.py                 # SEEDS: single source of truth for the 10-seed protocol
-│   ├── dedup_clustering.py             # Generates near_dup_group_id
-│   ├── extract_lexicon_v40.py          # Dumps the lexicon / teencode / emoji tables
-│   ├── finish_analysis.py              # Unified subgroup tagging + figures
-│   ├── v40_finish.py                   # Environment / version-drift diagnostics
-│   └── reference_lexicon_v40.json      # Serialized lexicon data
-├── data/
-│   └── dataset_cleaned_masked.csv      # Training data (25,289 rows, PII-masked)
-├── scripts/
-│   ├── run_ablation.py                 # Original ablation (cluster / neutral-flag variants)
-│   ├── run_ablation_fixed.py           # Revision ablation (lexicon / POS / class-weight variants)
-│   ├── verify_identical_partitions.py  # Confirms identical train/cal/test partitions across pipelines
-│   ├── mask_pii.py                     # Masks phone numbers, URLs, e-mails and social handles; re-scans after masking
-│   ├── make_label_sample.py            # Draws the stratified sample for the second annotator (writes a private key file)
-│   └── compute_kappa.py                # Inter-annotator agreement (Cohen's kappa, per-class, confusion matrix)
-├── results/
-│   ├── results_v40_multiseed.json      # AERS-Pro aggregated metrics (mean ± std), original run
-│   ├── results_phobert_8ep.json        # PhoBERT 8-epoch aggregated metrics
-│   ├── ablation_table.csv              # Ablation results (mean)
-│   ├── ablation_table_per_seed.csv     # Ablation results (per-seed)
-│   ├── lr_sweep_calibration_f1.csv     # PhoBERT learning-rate sweep (calibration F1)
-│   ├── phobert_logits/                 # Per-sample logits for PhoBERT (10 seeds)
-│   └── v40_probs/                      # Per-sample probabilities for AERS-Pro (10 seeds)
-├── evidence/                           # Split audits (scikit-learn 1.6.1 and 1.9.1) and training logs
-├── tables/                             # Statistical tests, calibration, per-class, subgroup and ablation tables
-├── t10/                                # Inference benchmark (latency, memory, model size)
-├── REVISION_EVIDENCE_CHECKLIST.md      # Reviewer request -> evidence map, including items still pending
-├── REPRODUCIBILITY.md                  # Environment pinning and known reproducibility caveats
-├── RESULTS_SUMMARY.md                  # Full tables behind the numbers in this README
-└── README.md                           # This file
+â”œâ”€â”€ src/
+â”‚   â”œâ”€â”€ train_v40.py                    # Full pipeline: preprocessing, features, base learners, stacking, calibration
+â”‚   â”œâ”€â”€ train_phobert_v2.py             # PhoBERT baseline: hyperparameter sweep, multi-seed runner, logits export
+â”‚   â”œâ”€â”€ seeds_config.py                 # SEEDS: single source of truth for the 10-seed protocol
+â”‚   â”œâ”€â”€ dedup_clustering.py             # Generates near_dup_group_id
+â”‚   â”œâ”€â”€ extract_lexicon_v40.py          # Dumps the lexicon / teencode / emoji tables
+â”‚   â”œâ”€â”€ finish_analysis.py              # Unified subgroup tagging + figures
+â”‚   â”œâ”€â”€ v40_finish.py                   # Environment / version-drift diagnostics
+â”‚   â””â”€â”€ reference_lexicon_v40.json      # Serialized lexicon data
+â”œâ”€â”€ data/
+â”‚   â””â”€â”€ dataset_cleaned_masked.csv      # Training data (25,289 rows, PII-masked)
+â”œâ”€â”€ scripts/
+â”‚   â”œâ”€â”€ run_ablation.py                 # Original ablation (cluster / neutral-flag variants)
+â”‚   â”œâ”€â”€ run_ablation_fixed.py           # Revision ablation (lexicon / POS / class-weight variants)
+â”‚   â”œâ”€â”€ verify_identical_partitions.py  # Confirms identical train/cal/test partitions across pipelines
+â”‚   â”œâ”€â”€ mask_pii.py                     # Masks phone numbers, URLs, e-mails and social handles; re-scans after masking
+â”‚   â”œâ”€â”€ make_label_sample.py            # Draws the stratified sample for the second annotator (writes a private key file)
+â”‚   â””â”€â”€ compute_kappa.py                # Inter-annotator agreement (Cohen's kappa, per-class, confusion matrix)
+â”œâ”€â”€ results/
+â”‚   â”œâ”€â”€ results_v40_multiseed.json      # AERS-Pro aggregated metrics (mean Â± std), original run
+â”‚   â”œâ”€â”€ results_phobert_8ep.json        # PhoBERT 8-epoch aggregated metrics
+â”‚   â”œâ”€â”€ ablation_table.csv              # Ablation results (mean)
+â”‚   â”œâ”€â”€ ablation_table_per_seed.csv     # Ablation results (per-seed)
+â”‚   â”œâ”€â”€ lr_sweep_calibration_f1.csv     # PhoBERT learning-rate sweep (calibration F1)
+â”‚   â”œâ”€â”€ phobert_logits/                 # Per-sample logits for PhoBERT (10 seeds)
+â”‚   â””â”€â”€ v40_probs/                      # Per-sample probabilities for AERS-Pro (10 seeds)
+â”œâ”€â”€ evidence/                           # Split audits (scikit-learn 1.6.1 and 1.9.1) and training logs
+â”œâ”€â”€ tables/                             # Statistical tests, calibration, per-class, subgroup and ablation tables
+â”œâ”€â”€ t10/                                # Inference benchmark (latency, memory, model size)
+â”œâ”€â”€ REVISION_EVIDENCE_CHECKLIST.md      # Reviewer request -> evidence map, including items still pending
+â”œâ”€â”€ REPRODUCIBILITY.md                  # Environment pinning and known reproducibility caveats
+â”œâ”€â”€ RESULTS_SUMMARY.md                  # Full tables behind the numbers in this README
+â””â”€â”€ README.md                           # This file
 ```
 
 ## Setup
