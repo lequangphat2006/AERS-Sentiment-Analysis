@@ -11,22 +11,22 @@ Deep transformer fine-tuning is not always available or necessary: it requires a
 
 ## Key Findings (Revision)
 
-All numbers are means over 10 seeds on the same group-aware test partitions, compared with the Nadeau-Bengio corrected paired t-test. PhoBERT is `vinai/phobert-base-v2`, learning rate 3e-5, up to 8 epochs with early stopping (patience 2), checkpoint selected by F1-macro on the calibration split. The learning rate was chosen on the calibration split, never on the test split (sweep over 1e-5, 2e-5, 3e-5, 5e-5; see `results/lr_sweep_calibration_f1.csv`).
+All numbers are means over 10 seeds on the same group-aware test partitions, compared with the Nadeau-Bengio corrected paired t-test. PhoBERT is `vinai/phobert-base-v2`, learning rate 3e-5, **5 epochs** (early-stopping patience 2), checkpoint selected by F1-macro on the calibration split; this is the main comparison, and its per-sample logits are archived in `results/phobert_logits/`. A run allowing up to 8 epochs is reported as a sensitivity analysis (per-seed aggregates in `tables/*_8ep.csv`; its per-sample logits were not preserved). The learning rate was chosen on the calibration split, never on the test split (sweep over 1e-5, 2e-5, 3e-5, 5e-5; see `results/lr_sweep_calibration_f1.csv`).
 
-**Accuracy.** A tuned PhoBERT baseline reaches an F1-macro of **0.8834**, which is **0.0169** (1.69 percentage points) higher than AERS-Pro (**0.8665**); the corrected 95% CI of the difference is [-0.0337, -0.0002] (p = 0.048). AERS-Pro wins on 1 of 10 seeds. This p-value is not adjusted for multiple comparisons; a Holm adjustment over the four primary metrics (F1, Accuracy, ECE, Brier) would put the F1 p-value near 0.10. Equivalence (TOST) is not established at margins of 0.01, 0.015, 0.02 or 0.03. The gap is concentrated in the negative and positive classes; the neutral class is tied (F1 0.8426 vs 0.8415, p = 0.94). No subgroup (negation, hedging, contrast, short text) shows a significant difference. Results are essentially unchanged when residual near-duplicate pairs are removed (measured in a word-TF-IDF proxy space, not the full feature space). With the earlier 5-epoch PhoBERT (F1 0.8805) the gap is 0.0140 (p = 0.081).
+**Accuracy.** A tuned PhoBERT baseline reaches an F1-macro of **0.8805**, which is **0.0140** (1.4 percentage points) higher than AERS-Pro (**0.8665**), and it is ahead on all 10 seeds. The corrected 95% CI of the difference is [-0.0302, +0.0021] (p = 0.081; Holm over the four primary metrics: 0.093), so the data do not establish a difference at the population level. Equivalence (TOST) is supported only at a margin of 0.03 (p = 0.026), not at 0.02 or tighter (p >= 0.21). With up to 8 epochs (sensitivity run) PhoBERT reaches 0.8834, the difference is -0.0169 (95% CI [-0.0337, -0.0002], p = 0.048, Holm 0.095) and no margin up to 0.03 reaches equivalence. The gap is concentrated in the negative and positive classes; the neutral class is tied (F1 0.8426 vs 0.8414, p = 0.94). No subgroup (negation, hedging, contrast, short text) shows a significant difference. Results are essentially unchanged when residual near-duplicate pairs are removed (measured in a word-TF-IDF proxy space, not the full feature space). The earlier fixed-configuration PhoBERT (lr 2e-5, 4 epochs) reached 0.8684, which is what the first version of the paper compared against.
 
-**Calibration.** AERS-Pro's raw probabilities are well calibrated (ECE **0.0241**) while raw PhoBERT is not (ECE **0.1069**). This advantage disappears once PhoBERT is calibrated post hoc: with temperature scaling (ECE 0.0314) or 3x3 Platt scaling (ECE 0.0225), the ECE and Brier differences to AERS-Pro are not statistically significant.
+**Calibration.** AERS-Pro's raw probabilities are well calibrated (ECE **0.0241**) while raw PhoBERT is not (ECE **0.1088**). This advantage largely disappears once PhoBERT is calibrated post hoc: with temperature scaling (ECE 0.0411) or 3x3 Platt scaling (ECE 0.0287), the ECE and Brier differences to AERS-Pro are not statistically significant (Holm-adjusted p >= 0.86). The ordering of AERS-Pro and PhoBERT + temperature scaling depends on the ECE binning (10 bins: 0.0241 vs 0.0411; 15 bins: 0.0290 vs 0.0276).
 
 **Cost.**
 
 | Aspect | AERS-Pro | PhoBERT |
 |---|---|---|
-| F1-macro | 0.8665 | **0.8834** (8 epochs) |
-| Raw ECE | **0.0241** | 0.1069 |
-| ECE after temperature scaling / Platt | n/a (already calibrated) | 0.0314 / 0.0225 |
+| F1-macro | 0.8665 | **0.8805** (5 epochs; 0.8834 with up to 8 epochs) |
+| Raw ECE | **0.0241** | 0.1088 |
+| ECE after temperature scaling / Platt | n/a (already calibrated) | 0.0411 / 0.0287 |
 | Model size | **7.44 MB** (5.95-8.27 MB across seeds) | 515-517 MB (about **69x** larger) |
 | Training hardware | CPU only (4 vCPU) | GPU (2 x T4) |
-| Training time per seed | about 2,080 s (30 Optuna trials) | about 1,660 s (5 epochs) |
+| Training time per seed | about 1,890 s published run, 2,080 s re-run (30 Optuna trials) | about 1,660 s (5 epochs) |
 | Single-sentence CPU latency (median; one seed, one CPU type) | 171 ms | 87 ms (excludes word segmentation) |
 | Batch of 32 on CPU, per sentence | **24.4 ms** | 280 ms |
 
@@ -45,9 +45,9 @@ The pipeline is implemented in `src/train_v40.py` and runs in the following stag
 - **Clause-boundary-aware negation handling**:
   - Negation scope is tracked per clause rather than with a fixed token window.
   - Even/odd negation counts drive sign flipping, which handles double negation.
-  - Lookahead rules avoid misreading tag-questions (`...khÃ´ng?`, `...khÃ´ng váº­y?`) and locational "Ä‘Ã¢u" as negation.
-- **Contrast-marker reweighting** ("nhÆ°ng", "tuy nhiÃªn", "mÃ ", ...): the clause before the marker is downweighted (0.5x) and the clause after keeps full weight, implemented as a single buffer-and-flush pass over clauses.
-- **Punctuation-safe tokenization**: lexicon and multi-word phrase matching (compound terms joined with `_`) does not silently fail on punctuation-glued tokens such as `"tá»‘t,"` or `"há»ng!"`.
+  - Lookahead rules avoid misreading tag-questions (`...không?`, `...không vậy?`) and locational "đâu" as negation.
+- **Contrast-marker reweighting** ("nhưng", "tuy nhiên", "mà", ...): the clause before the marker is downweighted (0.5x) and the clause after keeps full weight, implemented as a single buffer-and-flush pass over clauses.
+- **Punctuation-safe tokenization**: lexicon and multi-word phrase matching (compound terms joined with `_`) does not silently fail on punctuation-glued tokens such as `"tốt,"` or `"há»ng!"`.
 
 ### 2. Manual (Lexicon) Feature Extraction (`TextPreprocessor.extract_features`, `MetaFeatureExtractor`)
 
@@ -94,39 +94,39 @@ A roughly 60/20/20 Train/Calibration/Test split is produced by `StratifiedGroupK
 
 ```text
 .
-â”œâ”€â”€ src/
-â”‚   â”œâ”€â”€ train_v40.py                    # Full pipeline: preprocessing, features, base learners, stacking, calibration
-â”‚   â”œâ”€â”€ train_phobert_v2.py             # PhoBERT baseline: hyperparameter sweep, multi-seed runner, logits export
-â”‚   â”œâ”€â”€ seeds_config.py                 # SEEDS: single source of truth for the 10-seed protocol
-â”‚   â”œâ”€â”€ dedup_clustering.py             # Generates near_dup_group_id
-â”‚   â”œâ”€â”€ extract_lexicon_v40.py          # Dumps the lexicon / teencode / emoji tables
-â”‚   â”œâ”€â”€ finish_analysis.py              # Unified subgroup tagging + figures
-â”‚   â”œâ”€â”€ v40_finish.py                   # Environment / version-drift diagnostics
-â”‚   â””â”€â”€ reference_lexicon_v40.json      # Serialized lexicon data
-â”œâ”€â”€ data/
-â”‚   â””â”€â”€ dataset_cleaned_masked.csv      # Training data (25,289 rows, PII-masked)
-â”œâ”€â”€ scripts/
-â”‚   â”œâ”€â”€ run_ablation.py                 # Original ablation (cluster / neutral-flag variants)
-â”‚   â”œâ”€â”€ run_ablation_fixed.py           # Revision ablation (lexicon / POS / class-weight variants)
-â”‚   â”œâ”€â”€ verify_identical_partitions.py  # Confirms identical train/cal/test partitions across pipelines
-â”‚   â”œâ”€â”€ mask_pii.py                     # Masks phone numbers, URLs, e-mails and social handles; re-scans after masking
-â”‚   â”œâ”€â”€ make_label_sample.py            # Draws the stratified sample for the second annotator (writes a private key file)
-â”‚   â””â”€â”€ compute_kappa.py                # Inter-annotator agreement (Cohen's kappa, per-class, confusion matrix)
-â”œâ”€â”€ results/
-â”‚   â”œâ”€â”€ results_v40_multiseed.json      # AERS-Pro aggregated metrics (mean Â± std), original run
-â”‚   â”œâ”€â”€ results_phobert_8ep.json        # PhoBERT 8-epoch aggregated metrics
-â”‚   â”œâ”€â”€ ablation_table.csv              # Ablation results (mean)
-â”‚   â”œâ”€â”€ ablation_table_per_seed.csv     # Ablation results (per-seed)
-â”‚   â”œâ”€â”€ lr_sweep_calibration_f1.csv     # PhoBERT learning-rate sweep (calibration F1)
-â”‚   â”œâ”€â”€ phobert_logits/                 # Per-sample logits for PhoBERT (10 seeds)
-â”‚   â””â”€â”€ v40_probs/                      # Per-sample probabilities for AERS-Pro (10 seeds)
-â”œâ”€â”€ evidence/                           # Split audits (scikit-learn 1.6.1 and 1.9.1) and training logs
-â”œâ”€â”€ tables/                             # Statistical tests, calibration, per-class, subgroup and ablation tables
-â”œâ”€â”€ t10/                                # Inference benchmark (latency, memory, model size)
-â”œâ”€â”€ REVISION_EVIDENCE_CHECKLIST.md      # Reviewer request -> evidence map, including items still pending
-â”œâ”€â”€ REPRODUCIBILITY.md                  # Environment pinning and known reproducibility caveats
-â”œâ”€â”€ RESULTS_SUMMARY.md                  # Full tables behind the numbers in this README
-â””â”€â”€ README.md                           # This file
+├── src/
+│   ├── train_v40.py                    # Full pipeline: preprocessing, features, base learners, stacking, calibration
+│   ├── train_phobert_v2.py             # PhoBERT baseline: hyperparameter sweep, multi-seed runner, logits export
+│   ├── seeds_config.py                 # SEEDS: single source of truth for the 10-seed protocol
+│   ├── dedup_clustering.py             # Generates near_dup_group_id
+│   ├── extract_lexicon_v40.py          # Dumps the lexicon / teencode / emoji tables
+│   ├── finish_analysis.py              # Unified subgroup tagging + figures
+│   ├── v40_finish.py                   # Environment / version-drift diagnostics
+│   └── reference_lexicon_v40.json      # Serialized lexicon data
+├── data/
+│   └── dataset_cleaned_masked.csv      # Training data (25,289 rows, PII-masked)
+├── scripts/
+│   ├── run_ablation.py                 # Original ablation (cluster / neutral-flag variants)
+│   ├── run_ablation_fixed.py           # Revision ablation (lexicon / POS / class-weight variants)
+│   ├── verify_identical_partitions.py  # Confirms identical train/cal/test partitions across pipelines
+│   ├── mask_pii.py                     # Masks phone numbers, URLs, e-mails and social handles; re-scans after masking
+│   ├── make_label_sample.py            # Draws the stratified sample for the second annotator (writes a private key file)
+│   └── compute_kappa.py                # Inter-annotator agreement (Cohen's kappa, per-class, confusion matrix)
+├── results/
+│   ├── results_v40_multiseed.json      # AERS-Pro aggregated metrics (mean ± std), original run
+│   ├── results_phobert_5ep.json        # PhoBERT 5-epoch aggregated metrics (main comparison)
+│   ├── ablation_table.csv              # Ablation results (mean)
+│   ├── ablation_table_per_seed.csv     # Ablation results (per-seed)
+│   ├── lr_sweep_calibration_f1.csv     # PhoBERT learning-rate sweep (calibration F1)
+│   ├── phobert_logits/                 # Per-sample logits for PhoBERT (10 seeds)
+│   └── v40_probs/                      # Per-sample probabilities for AERS-Pro (10 seeds)
+├── evidence/                           # Split audits (scikit-learn 1.6.1 and 1.9.1) and training logs
+├── tables/                             # Statistical tests, calibration, per-class, subgroup and ablation tables
+├── t10/                                # Inference benchmark (latency, memory, model size)
+├── REVISION_EVIDENCE_CHECKLIST.md      # Reviewer request -> evidence map, including items still pending
+├── REPRODUCIBILITY.md                  # Environment pinning and known reproducibility caveats
+├── RESULTS_SUMMARY.md                  # Full tables behind the numbers in this README
+└── README.md                           # This file
 ```
 
 ## Setup
@@ -152,10 +152,10 @@ python src/dedup_clustering.py --input_dir data --output_dir data_deduped --thre
 python src/train_v40.py
 ```
 
-**3. Run the PhoBERT baseline (8 epochs):**
+**3. Run the PhoBERT baseline (5 epochs, main comparison):**
 
 ```bash
-python src/train_phobert_v2.py --lr 3e-5 --epochs 8 --result_path results/results_phobert_8ep.json
+python src/train_phobert_v2.py --lr 3e-5 --epochs 5 --result_path results/results_phobert_5ep.json
 ```
 
 **4. Run the ablation study** (revision variants: `full`, `no_pos`, `no_lex`, `no_both`, `no_cw`):
@@ -202,3 +202,9 @@ python scripts/compute_kappa.py --key label_round2/annotation_key_PRIVATE.csv --
 ## Data use and privacy
 
 `data/dataset_cleaned_masked.csv` contains review texts with phone numbers, URLs, e-mail addresses, social-media handles and referral codes replaced by placeholders (`[PHONE]`, `[URL]`, `[EMAIL]`, `[SOCIAL]`, `[REFCODE]`). Personal names and postal addresses were not screened. The corpus is provided for non-commercial research use only; if you find residual personal information, please open an issue so it can be removed. All experiments were run on the unmasked corpus; the released file differs from it in 71 of 25,289 rows (same row order, labels and near-duplicate groups). Per-sample prediction files contain `row_index` and numeric outputs only; review text can be recovered from the masked corpus through `row_index`.
+
+## Supplementary material for the paper
+
+`docs/SUPPLEMENT.md` contains Algorithm 1 (fitting and selection protocol), the Optuna search space and selected values, the equivalence-margin and calibration-variant tables, the near-duplicate sensitivity table, the full deployment table, the second-annotator confusion matrix, per-class results, the confusion-matrix and paired-F1 figures, and illustrative error cases (supplementary Tables S1-S7 cited in the paper). All tables are generated from the files in `tables/` and `results/`.
+
+`docs/LABELING_GUIDELINE.md` is the labelling guideline (in Vietnamese) used for the corpus and for the second-annotator study, including the quality-control procedure that was actually carried out.

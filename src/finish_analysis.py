@@ -359,7 +359,7 @@ def load_per_sample(kind, seed):
 
 
 REF_JSON = {"v40": "results/results_v40_multiseed.json",
-            "phobert": "results/results_phobert_8ep.json"}   # PhoBERT 8 epoch = ban dung trong so sanh cuoi
+            "phobert": "results/results_phobert_5ep.json"}   # PhoBERT 5 epoch = ban chinh trong so sanh cuoi (8 epoch chi la do nhay)
 
 
 def _reference_metrics(kind, seed):
